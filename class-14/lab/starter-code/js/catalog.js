@@ -1,6 +1,7 @@
 /* global Product, Cart */
 
 'use strict';
+counterNumber=0;
 
 // Set up an empty cart for use on this page.
 const cart = new Cart([]);
@@ -10,9 +11,12 @@ const cart = new Cart([]);
 function populateForm() {
 
   //TODO: Add an <option> tag inside the form's select for each product
+  Option
   const selectElement = document.getElementById('items');
   for (let i in Product.allProducts) {
-
+     let optionElement= document.createElement('option')
+     optionElement.textContent=Product.allProducts[i].name;
+     selectElement.appendChild(optionElement);
   }
 
 }
@@ -21,10 +25,15 @@ function populateForm() {
 // object, save the whole thing back to local storage and update the screen
 // so that it shows the # of items in the cart and a quick preview of the cart itself.
 function handleSubmit(event) {
-
+  
   // TODO: Prevent the page from reloading
-
+  event.preventDefault();
   // Do all the things ...
+CartItem.Product=event.target.quantity.value;
+//console.log(CartItem.Product);
+counterNumber++;
+
+
   addSelectedItemToCart();
   cart.saveToLocalStorage();
   updateCounter();
