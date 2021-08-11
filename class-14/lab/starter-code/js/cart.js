@@ -9,7 +9,12 @@ let cart;
 function loadCart() {
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   cart = new Cart(cartItems);
+  for (let i = 0; i < cartItems.length; i++) {
+    cart.push(new CartItem)
 }
+
+}
+
 
 // Make magic happen --- re-pull the Cart, clear out the screen and re-draw it
 function renderCart() {
@@ -19,11 +24,34 @@ function renderCart() {
 }
 
 // TODO: Remove all of the rows (tr) in the cart table (tbody)
-function clearCart() {}
+function clearCart() {
+  for(let i = 2 ; i <= Cart.items.length ;i++){
+table.deleteRow(i);
+
+
+  }
+
+
+  }
+
 
 // TODO: Fill in the <tr>'s under the <tbody> for each item in the cart
 function showCart() {
-
+for (i = 0 ; i < Cart.length ; i++){
+ let trelement = document.createElement('tr');
+    table.appendChild(trelement);
+let clear = document.createElement('td');
+    trelement.appendChild(clear);
+    let name = document.createElement('td');
+    trelement.appendChild(name);
+    let qua= document.createElement('td');
+    trelement.appendChild(qua);
+    clear.textContent = "clear";
+    name.textContent =  Cart.items[i].product;
+    qua.textContent = Cart.items[i].quantity;
+ let body = document.getElementsByTagName('tbody');
+ trelement.appendChild(body);
+}
   // TODO: Find the table body
 
   // TODO: Iterate over the items in the cart
@@ -36,9 +64,12 @@ function showCart() {
 function removeItemFromCart(event) {
 
   // TODO: When a delete link is clicked, use cart.removeItem to remove the correct item
-  // TODO: Save the cart back to local storage
-  // TODO: Re-draw the cart table
+  Cart.removeItem(event.target.items.value) ;
 
+  // TODO: Save the cart back to local storage
+  Cart.saveToLocalStorage(Cart.items);
+  // TODO: Re-draw the cart table
+  renderCart();
 }
 
 // This will initialize the page and draw the cart on screen
